@@ -5,3 +5,4 @@ Scrapy
 selenium
 pandas
 numpy
+Flask
