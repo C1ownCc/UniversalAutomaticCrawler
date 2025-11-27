@@ -5,11 +5,17 @@ setup(
     version='0.1',
     packages=find_packages(),
     install_requires=[
-        # Add your package dependencies here
+        'requests',
+        'beautifulsoup4',
+        'lxml',
+        'pandas',
+        'numpy',
+        'Flask',
     ],
     entry_points={
         'console_scripts': [
-            # Define console scripts here if any
+            'universal-crawler=universal_crawler.cli:main',
+            'universal-crawler-web=universal_crawler.webapp:main',
         ],
     },
     author='C1ownCc',
@@ -22,5 +28,5 @@ setup(
         'License :: OSI Approved :: MIT License',
         'Operating System :: OS Independent',
     ],
-    python_requires='>=3.6',
+    python_requires='>=3.8',
 )
