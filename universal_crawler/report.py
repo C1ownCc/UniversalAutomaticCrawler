@@ -46,8 +46,8 @@ class CrawlerReport:
         return paths
 
     def _markdown_report(self) -> str:
-        lines = ["# Crawl Report", ""]
-        lines.append(f"Total pages crawled: {len(self.pages)}")
+        lines = ["# Crawl Report / 爬取报告", ""]
+        lines.append(f"Total pages crawled: {len(self.pages)} (总计页面数)")
         lines.append("")
         lines.extend(self._status_summary())
         lines.append("")
@@ -58,22 +58,22 @@ class CrawlerReport:
 
     def _status_summary(self) -> List[str]:
         counter = Counter(page.status_code for page in self.pages)
-        lines = ["## Status codes"]
+        lines = ["## Status codes / 状态码"]
         for code, count in sorted(counter.items()):
-            lines.append(f"- {code}: {count}")
+            lines.append(f"- {code}: {count} (次数)")
         return lines
 
     def _top_words_section(self, limit: int = 20) -> List[str]:
         text = " ".join(page.text_preview for page in self.pages)
         words = [w.lower() for w in text.split() if w.isalpha() and len(w) > 3]
         common = Counter(words).most_common(limit)
-        lines = ["## Top words", "| Word | Count |", "| --- | --- |"]
+        lines = ["## Top words / 高频词汇", "| Word / 词语 | Count / 次数 |", "| --- | --- |"]
         for word, count in common:
             lines.append(f"| {word} | {count} |")
         return lines
 
     def _link_section(self) -> List[str]:
-        lines = ["## Links discovered"]
+        lines = ["## Links discovered / 发现的链接"]
         for page in self.pages:
             if not page.links:
                 continue
